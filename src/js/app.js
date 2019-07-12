@@ -47,8 +47,14 @@ del.addEventListener('click', () => {
 
 period.addEventListener("click", () => {
     display == '0' ? display = '' : display
-    display += period.textContent.toString();
-    displayNum();
+
+    if (error('.') === display) {
+        display += period.textContent.toString();
+        displayNum();
+    } else {
+        error('.')
+    }
+
 });
 
 zero.addEventListener("click", () => {
@@ -112,26 +118,44 @@ nine.addEventListener("click", () => {
 
 minus.addEventListener("click", () => {
     display == '0' ? display = '' : display;
-    display += minus.textContent.toString();
-    displayNum();
+    if (error('-') === display) {
+        display += minus.textContent.toString();
+        displayNum();
+    } else {
+        error()
+    }
 });
 
 multiply.addEventListener("click", () => {
     display == '0' ? display = '' : display;
-    display += multiply.textContent.toString();
-    displayNum();
+    if (error("*") === display) {
+        display += multiply.textContent.toString();
+        displayNum();
+    } else {
+        error('*')
+    }
 });
 
 plus.addEventListener("click", () => {
     display == '0' ? display = '' : display;
-    display += plus.textContent.toString();
-    displayNum();
+
+    if (error('+') === display) {
+        display += plus.textContent.toString();
+        displayNum();
+    } else {
+        error('+')
+    }
 });
 
 divide.addEventListener("click", () => {
     display == '0' ? display = '' : display;
-    display += divide.textContent.toString();
-    displayNum();
+
+    if (error('/') === display) {
+        display += divide.textContent.toString();
+        displayNum();
+    } else {
+        error('/')
+    }
 });
 
 c.addEventListener("click", () => {
@@ -146,11 +170,20 @@ equals.addEventListener("click", () => {
     let result = calc.evaluate();
 
     Gt += result
-
     screen.textContent = result;
 
 });
 
 function displayNum() {
     screen.textContent = display
+}
+
+function error(symbol) {
+    if (display[display.length - 1] === symbol) {
+        display = "Error!"
+        displayNum();
+        display = '0'
+    } else {
+        return display;
+    }
 }
